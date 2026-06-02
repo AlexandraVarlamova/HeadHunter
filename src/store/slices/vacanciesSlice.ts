@@ -1,13 +1,15 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
-import { type HHResponse, type Vacancy } from '../../types';
+import {
+  createSlice,
+  createAsyncThunk,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
+import { type HHResponse, type Vacancy } from "../../types";
 
-
-interface FetchVacanciesArgs {
+interface FetchVacancies {
   text: string;
   page: number;
-  area?: string | null;
+  area: string | null;
 }
-
 
 interface VacanciesState {
   list: Vacancy[];
@@ -16,36 +18,28 @@ interface VacanciesState {
   error: string | null;
 }
 
-export const fetchVacancies = createAsyncThunk<HHResponse, FetchVacanciesArgs>(
-  'vacancies/fetchVacancies',
-  async ({ text, page, area }, { rejectWithValue }) => {
+export const fetchVacancies = createAsyncThunk<HHResponse, FetchVacancies>(
+  "vacancies/fetchVacancies",
+  async ({ text, page}, { rejectWithValue }) => {
     try {
-
-      let url = `/api/hh/vacancies?text=${encodeURIComponent(text)}&page=${page}`;
-
-      if (area) {
-        url += `&area=${area}`;
-      }
+      const url = `/api/hh/openapi/redoc#tag/Poisk-vakansij/operation/get-vacancies?text=${encodeURIComponent(text)}&page=${page}`;
 
 
       const response = await fetch(url);
-
       if (!response.ok) {
         throw new Error(`Ошибка сервера: ${response.status}`);
       }
-
       const data: HHResponse = await response.json();
       return data;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }
-      return rejectWithValue('Произошла неизвестная ошибка');
+      return rejectWithValue("Произошла неизвестная ошибка");
     }
-  }
+  },
 );
 
-// 3. Добавляем pages в initialState
 const initialState: VacanciesState = {
   list: [],
   pages: 0,
@@ -54,7 +48,7 @@ const initialState: VacanciesState = {
 };
 
 const vacanciesSlice = createSlice({
-  name: 'vacancies',
+  name: "vacancies",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -63,12 +57,15 @@ const vacanciesSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchVacancies.fulfilled, (state, action: PayloadAction<HHResponse>) => {
-        state.loading = false;
-        state.list = action.payload.items;
-        // 4. Сохраняем общее количество страниц из ответа API (HH.ru присылает поле pages)
-        state.pages = action.payload.pages;
-      })
+      .addCase(
+        fetchVacancies.fulfilled,
+        (state, action: PayloadAction<HHResponse>) => {
+          state.loading = false;
+          state.list = action.payload.items;
+
+          state.pages = action.payload.pages;
+        },
+      )
       .addCase(fetchVacancies.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
