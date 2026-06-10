@@ -36,6 +36,8 @@ export default function App() {
   ]);
   const [skillInput, setSkillInput] = useState("");
 
+  //загрузка вакансий
+
   useEffect(() => {
     const skillsQuery = skills.join(" OR ");
 
@@ -44,36 +46,28 @@ export default function App() {
     dispatch(
       fetchVacancies({
         text: fullSearchText,
-        page: page - 1,
         area: area,
       }),
     );
   }, [page, searchText, skills, area, dispatch]);
 
 
-   const handleAddSkill = () => {
 
+  const handleAddSkill = () => {
     if (skillInput) {
-
       setSkills([...skills, skillInput]);
     }
 
     setSkillInput("");
   };
 
-
   const handleRemoveSkill = (skillToRemove: string) => {
-
     const updatedSkills = skills.filter((currentSkill) => {
-
       return currentSkill !== skillToRemove;
     });
 
-
     setSkills(updatedSkills);
   };
-
-
 
   const handleSearch = () => {
     setPage(1);
@@ -134,7 +128,7 @@ export default function App() {
                 placeholder="Все города"
                 data={[
                   { value: "1", label: "Москва" },
-                  { value: "2", label: "Санкт-Петербург" },
+                  { value: "2", label: "Уфа" },
                 ]}
                 value={area}
                 onChange={(val) => setArea(val ? String(val) : null)}
@@ -164,7 +158,7 @@ export default function App() {
             )}
             {error && (
               <Center py="xl">
-                <Text c="red">Произошла ошибка: {error} 😥</Text>
+                <Text c="red">Сервис временно недоступен {error}</Text>
               </Center>
             )}
 

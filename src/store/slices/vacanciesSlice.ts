@@ -4,38 +4,49 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 import { type HHResponse, type Vacancy } from "../../types";
-
+import { VACANCIES } from "../../mok/vacancies";
 interface FetchVacancies {
   text: string;
-  page: number;
+  page: string;
   area: string | null;
 }
-
 interface VacanciesState {
   list: Vacancy[];
   pages: number;
+  perPage: number;
   loading: boolean;
   error: string | null;
 }
-
 export const fetchVacancies = createAsyncThunk<HHResponse, FetchVacancies>(
   "vacancies/fetchVacancies",
-  async ({ text, page}, { rejectWithValue }) => {
+  async ({ text, page, area }, { rejectWithValue }) => {
     try {
-      const url = `/api/hh/openapi/redoc#tag/Poisk-vakansij/operation/get-vacancies?text=${encodeURIComponent(text)}&page=${page}`;
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      const allItems = VACANCIES.items || [];
+      const perPage = 5;
+
+      let currentPage = parseInt(page, 5);
+      if (isNaN(currentPage)) currentPage = 0;
+
+      const start = currentPage * perPage;
+      const end = start + perPage;
+
+      const slicedItems = allItems.slice(start, end);
 
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
-      }
-      const data: HHResponse = await response.json();
+
+      const data: HHResponse = {
+        ...VACANCIES,
+        items: slicedItems,
+        pages: Math.ceil(allItems.length / perPage),
+        page: currentPage,
+      };
+
       return data;
     } catch (error) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      }
-      return rejectWithValue("Произошла неизвестная ошибка");
+      console.error("Ошибка в Thunk:", error);
+      return rejectWithValue("Ошибка при загрузке");
     }
   },
 );
@@ -43,10 +54,10 @@ export const fetchVacancies = createAsyncThunk<HHResponse, FetchVacancies>(
 const initialState: VacanciesState = {
   list: [],
   pages: 0,
+  perPage: 5,
   loading: false,
   error: null,
 };
-
 const vacanciesSlice = createSlice({
   name: "vacancies",
   initialState,
@@ -61,9 +72,9 @@ const vacanciesSlice = createSlice({
         fetchVacancies.fulfilled,
         (state, action: PayloadAction<HHResponse>) => {
           state.loading = false;
-          state.list = action.payload.items;
 
-          state.pages = action.payload.pages;
+          state.list = action.payload.items || [];
+          state.pages = action.payload.pages || 0;
         },
       )
       .addCase(fetchVacancies.rejected, (state, action) => {
@@ -72,5 +83,4 @@ const vacanciesSlice = createSlice({
       });
   },
 });
-
 export const vacanciesReducer = vacanciesSlice.reducer;
