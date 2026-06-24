@@ -1,6 +1,3 @@
-
-
-
 export interface Vacancy {
   id: string;
   name: string;
@@ -30,7 +27,4 @@ export interface HHResponse {
   page: number;
   per_page: number;
   found: number;
-
 }
-
-

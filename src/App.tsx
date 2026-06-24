@@ -14,11 +14,18 @@ import {
   Loader,
   Center,
   Text,
+  Autocomplete,
 } from "@mantine/core";
 import { Header } from "./components/Header";
 import { JobCard } from "./components/JobCard";
 import { type RootState, type AppDispatch } from "./store/store";
 import { fetchVacancies } from "./store/slices/vacanciesSlice";
+import { VACANCIES } from "./mok/vacancies";
+
+interface Skill {
+  name: string;
+  active: boolean;
+}
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,52 +33,72 @@ export default function App() {
     (state: RootState) => state.vacancies,
   );
 
+  const [searchInput, setSearchInput] = useState("");
   const [searchText, setSearchText] = useState("");
+
   const [area, setArea] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const [skills, setSkills] = useState<string[]>([
-    "TypeScript",
-    "React",
-    "Redux",
-  ]);
   const [skillInput, setSkillInput] = useState("");
 
-  //загрузка вакансий
+  const [skills, setSkills] = useState<Skill[]>([
+    { name: "TypeScript", active: false },
+    { name: "React", active: false },
+    { name: "Redux", active: false },
+    { name: "Pyton", active: false },
+  ]);
 
   useEffect(() => {
-    const skillsQuery = skills.join(" OR ");
-
-    const fullSearchText = [searchText, skillsQuery].filter(Boolean).join(" ");
+    const activeSkills = skills.filter((s) => s.active).map((s) => s.name);
+    const fullSearchText = [searchText, ...activeSkills].join(" ");
 
     dispatch(
       fetchVacancies({
         text: fullSearchText,
         area: area,
+        page: String(page),
       }),
     );
   }, [page, searchText, skills, area, dispatch]);
 
-
-
   const handleAddSkill = () => {
-    if (skillInput) {
-      setSkills([...skills, skillInput]);
+    if (skillInput && !skills.find((s) => s.name === skillInput)) {
+      setSkills([...skills, { name: skillInput, active: true }]);
     }
-
     setSkillInput("");
   };
 
-  const handleRemoveSkill = (skillToRemove: string) => {
-    const updatedSkills = skills.filter((currentSkill) => {
-      return currentSkill !== skillToRemove;
-    });
+  const handleRemoveSkill = (skillNameToRemove: string) => {
+    setSkills(skills.filter((s) => s.name !== skillNameToRemove));
+  };
 
-    setSkills(updatedSkills);
+  const toggleSkill = (skillNameToToggle: string) => {
+    setSkills(
+      skills.map((s) =>
+        s.name === skillNameToToggle ? { ...s, active: !s.active } : s,
+      ),
+    );
+    setPage(1);
   };
 
   const handleSearch = () => {
+    setSearchText(searchInput);
     setPage(1);
   };
+
+  const jobSuggestions = Array.from(
+    new Set(VACANCIES.items.map((vacancy: any) => vacancy.name)),
+  );
+
+  const cityOptions = Array.from(
+    new Set(
+      VACANCIES.items
+        .filter((item: any) => item.area && item.area.name)
+        .map((item: any) => item.area.name),
+    ),
+  ).map((name) => ({
+    value: name as string,
+    label: name as string,
+  }));
 
   return (
     <div>
@@ -84,6 +111,7 @@ export default function App() {
             по профессии Frontend-разработчик
           </Text>
         </Title>
+
         <Grid>
           <Grid.Col span={{ base: 12, md: 4 }}>
             <div
@@ -98,6 +126,9 @@ export default function App() {
                 placeholder="Например, Next.js"
                 value={skillInput}
                 onChange={(e) => setSkillInput(e.currentTarget.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddSkill();
+                }}
                 rightSection={
                   <ActionIcon
                     onClick={handleAddSkill}
@@ -114,11 +145,19 @@ export default function App() {
               <Group gap="xs" mb="lg">
                 {skills.map((skill) => (
                   <Pill
-                    key={skill}
+                    key={skill.name}
                     withRemoveButton
-                    onRemove={() => handleRemoveSkill(skill)}
+                    onRemove={() => handleRemoveSkill(skill.name)}
+                    onClick={() => toggleSkill(skill.name)}
+                    style={{
+                      cursor: "pointer",
+                      transition: "all 0.2s",
+                      backgroundColor: skill.active ? "#228be6" : "#e9ecef",
+                      color: skill.active ? "white" : "#495057",
+                      opacity: skill.active ? 1 : 0.7,
+                    }}
                   >
-                    {skill}
+                    {skill.name}
                   </Pill>
                 ))}
               </Group>
@@ -126,26 +165,28 @@ export default function App() {
               <Select
                 label="Город"
                 placeholder="Все города"
-                data={[
-                  { value: "1", label: "Москва" },
-                  { value: "2", label: "Уфа" },
-                ]}
+                data={cityOptions}
                 value={area}
-                onChange={(val) => setArea(val ? String(val) : null)}
+                onChange={(val) => {
+                  setArea(val ? String(val) : null);
+                  setPage(1);
+                }}
                 clearable
               />
             </div>
           </Grid.Col>
-
           <Grid.Col span={{ base: 12, md: 8 }}>
             <Group mb="lg">
-              <TextInput
+              <Autocomplete
                 placeholder="Должность или название компании"
                 style={{ flexGrow: 1 }}
-                value={searchText}
-                onChange={(e) => setSearchText(e.currentTarget.value)}
+                value={searchInput}
+                onChange={setSearchInput}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSearch();
+                }}
+                data={jobSuggestions}
               />
-
               <Button onClick={handleSearch} color="blue">
                 Найти
               </Button>
@@ -156,6 +197,7 @@ export default function App() {
                 <Loader />
               </Center>
             )}
+
             {error && (
               <Center py="xl">
                 <Text c="red">Сервис временно недоступен {error}</Text>

@@ -289,6 +289,13 @@ export const VACANCIES = {
         name: "Москва",
         url: "https://api.hh.ru/areas/1",
       },
+
+           key_skills: [
+        { name: "TypeScript" },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "Redux" }
+      ],
       brand_snippet: {
         background: {
           color: null,
@@ -454,10 +461,16 @@ export const VACANCIES = {
       apply_alternate_url:
         "https://hh.ru/applicant/vacancy_response?vacancyId=8331229",
       area: {
-        id: "1",
+        id: "3",
         name: "Набережные Челны",
         url: "https://api.hh.ru/areas/1",
       },
+            key_skills: [
+        { name: "TypeScript" },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "Redux" }
+      ],
       brand_snippet: {
         background: {
           color: null,
@@ -624,10 +637,15 @@ export const VACANCIES = {
       apply_alternate_url:
         "https://hh.ru/applicant/vacancy_response?vacancyId=8331230",
       area: {
-        id: "1",
+        id: "2",
         name: "Уфа",
         url: "https://api.hh.ru/areas/1",
       },
+           key_skills: [
+        { name: "TypeScript" },
+        { name: "React" },
+
+      ],
       brand_snippet: {
         background: {
           color: null,
@@ -794,10 +812,16 @@ export const VACANCIES = {
       apply_alternate_url:
         "https://hh.ru/applicant/vacancy_response?vacancyId=8331231",
       area: {
-        id: "1",
+        id: "2",
         name: "Уфа",
         url: "https://api.hh.ru/areas/1",
       },
+            key_skills: [
+        { name: "TypeScript" },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "Redux" }
+      ],
       brand_snippet: {
         background: {
           color: null,
@@ -967,6 +991,13 @@ export const VACANCIES = {
         name: "Москва",
         url: "https://api.hh.ru/areas/1",
       },
+     key_skills: [
+        { name: "TypeScript" },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "Redux" }
+      ],
+
       brand_snippet: {
         background: {
           color: null,
@@ -1132,10 +1163,16 @@ export const VACANCIES = {
       apply_alternate_url:
         "https://hh.ru/applicant/vacancy_response?vacancyId=8331233",
       area: {
-        id: "1",
+        id: "3",
         name: "Набережные Челны",
         url: "https://api.hh.ru/areas/1",
       },
+      key_skills: [
+        { name: "TypeScript" },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "Redux" },
+      ],
       brand_snippet: {
         background: {
           color: null,
@@ -1302,10 +1339,17 @@ export const VACANCIES = {
       apply_alternate_url:
         "https://hh.ru/applicant/vacancy_response?vacancyId=8331230",
       area: {
-        id: "1",
+        id: "2",
         name: "Уфа",
         url: "https://api.hh.ru/areas/1",
       },
+
+           key_skills: [
+        { name: "TypeScript" },
+        { name: "React" },
+
+      ],
+
       brand_snippet: {
         background: {
           color: null,
