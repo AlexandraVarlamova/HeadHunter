@@ -1,7 +1,7 @@
 import { Flex, Text, Container } from "@mantine/core";
 import hhLogo from "../assets/hh.svg";
 
-export const Header = () => {
+const Header = () => {
   return (
     <div style={{ borderBottom: "1px solid #eaeaea", marginBottom: "20px" }}>
       <Container size="lg">
@@ -26,3 +26,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header
