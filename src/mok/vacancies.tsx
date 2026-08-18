@@ -265,14 +265,14 @@ export const VACANCIES = {
       accept_incomplete_resumes: false,
       address: {
         building: "9с10",
-        city: "Москва",
+        city: "Уфа",
         description: "На проходной потребуется паспорт",
         lat: 55.807794,
         lng: 37.638699,
         metro_stations: [
           {
             lat: 55.807794,
-            line_id: "6",
+            line_id: "1",
             line_name: "Калужско-Рижская",
             lng: 37.638699,
             station_id: "6.8",
@@ -281,12 +281,12 @@ export const VACANCIES = {
         ],
         street: "улица Годовикова",
       },
-      alternate_url: "https://hh.ru/vacancy/8331228",
+      alternate_url: "https://hh.ru/vacancy/3",
       apply_alternate_url:
-        "https://hh.ru/applicant/vacancy_response?vacancyId=8331228",
+        "https://hh.ru/applicant/vacancy_response?vacancyId=3",
       area: {
         id: "1",
-        name: "Москва",
+        name: "Уфа",
         url: "https://api.hh.ru/areas/1",
       },
 
@@ -379,7 +379,7 @@ export const VACANCIES = {
         url: "https://api.hh.ru/employers/1455",
       },
       has_test: true,
-      id: "8331228",
+      id: "3",
       insider_interview: {
         id: "12345",
         url: "https://hh.ru/interview/12345?employerId=777",
@@ -432,7 +432,7 @@ export const VACANCIES = {
         id: "open",
         name: "Открытая",
       },
-      url: "https://api.hh.ru/vacancies/8331228",
+      url: "https://api.hh.ru/vacancies/3",
     },
 
     // Frontend разработчик в EdTech продукт
@@ -457,9 +457,9 @@ export const VACANCIES = {
         ],
         street: "улица Годовикова",
       },
-      alternate_url: "https://hh.ru/vacancy/8331229",
+      alternate_url: "https://hh.ru/vacancy/4",
       apply_alternate_url:
-        "https://hh.ru/applicant/vacancy_response?vacancyId=8331229",
+        "https://hh.ru/applicant/vacancy_response?vacancyId=4",
       area: {
         id: "3",
         name: "Набережные Челны",
@@ -554,7 +554,7 @@ export const VACANCIES = {
         url: "https://api.hh.ru/employers/1455",
       },
       has_test: true,
-      id: "8331229",
+      id: "4",
       insider_interview: {
         id: "12345",
         url: "https://hh.ru/interview/12345?employerId=777",
@@ -608,184 +608,141 @@ export const VACANCIES = {
         id: "open",
         name: "Открытая",
       },
-      url: "https://api.hh.ru/vacancies/8331229",
+      url: "https://api.hh.ru/vacancies/4",
     },
 
     // Frontend разработчик в стартап
-
-    {
-      accept_incomplete_resumes: false,
-      address: {
-        building: "9с10",
-        city: "Москва",
-        description: "На проходной потребуется паспорт",
+{
+  accept_incomplete_resumes: false,
+  address: {
+    building: "9с10",
+    city: "Москва",
+    description: "На проходной потребуется паспорт",
+    lat: 55.807794,
+    lng: 37.638699,
+    metro_stations: [
+      {
         lat: 55.807794,
+        line_id: "6",
+        line_name: "Калужско-Рижская",
         lng: 37.638699,
-        metro_stations: [
-          {
-            lat: 55.807794,
-            line_id: "6",
-            line_name: "Калужско-Рижская",
-            lng: 37.638699,
-            station_id: "6.8",
-            station_name: "Алексеевская",
-          },
-        ],
-        street: "улица Годовикова",
+        station_id: "6.8",
+        station_name: "Алексеевская",
       },
-      alternate_url: "https://hh.ru/vacancy/8331230",
-      apply_alternate_url:
-        "https://hh.ru/applicant/vacancy_response?vacancyId=8331230",
-      area: {
-        id: "2",
-        name: "Уфа",
-        url: "https://api.hh.ru/areas/1",
-      },
-           key_skills: [
-        { name: "TypeScript" },
-        { name: "React" },
-
-      ],
-      brand_snippet: {
-        background: {
-          color: null,
-          gradient: {
-            angle: 45,
-            color_list: [
-              {
-                color: "#FF0000",
-                position: 10,
-              },
-              {
-                color: "#FA0000",
-                position: 9,
-              },
-            ],
-          },
-        },
-        logo: "https://hhcdn.ru/00001.png",
-        logo_scalable: {
-          default: {
-            height: 300,
-            url: "https://hhcdn.ru/00021.png",
-            width: 500,
-          },
-          xs: {
-            height: 100,
-            url: "https://hhcdn.ru/00022.png",
-            width: 200,
-          },
-        },
-        logo_xs: "https://hhcdn.ru/00002.png",
-        picture: "https://hhcdn.ru/00003.png",
-        picture_scalable: {
-          default: {
-            height: 350,
-            url: "https://hhcdn.ru/00023.png",
-            width: 550,
-          },
-          xs: {
-            height: 150,
-            url: "https://hhcdn.ru/00024.png",
-            width: 250,
-          },
-        },
-        picture_xs: "https://hhcdn.ru/00004.png",
-      },
-      branding: {
-        tariff: "BASIC",
-        type: "CONSTRUCTOR",
-      },
-      contacts: {
-        name: "Имя",
-        phones: [
-          {
-            city: "985",
-            comment: null,
-            country: "7",
-            number: "000-00-00",
-          },
+    ],
+    street: "улица Годовикова",
+  },
+  alternate_url: "https://hh.ru/vacancy/1",
+  apply_alternate_url: "https://hh.ru/applicant/vacancy_response?vacancyId=1",
+  area: {
+    id: "2",
+    name: "Уфа",
+    url: "https://api.hh.ru/areas/1",
+  },
+  key_skills: [
+    { name: "TypeScript" },
+    { name: "React" },
+  ],
+  brand_snippet: {
+    background: {
+      color: null,
+      gradient: {
+        angle: 45,
+        color_list: [
+          { color: "#FF0000", position: 10 },
+          { color: "#FA0000", position: 9 },
         ],
       },
-      counters: {
-        responses: 0,
-      },
-      department: {
-        id: "HH-1455-TECH",
-        name: "HeadHunter::Технический департамент",
-      },
-      employer: {
-        accredited_it_employer: false,
-        alternate_url: "https://hh.ru/employer/1455",
-        country_id: 1,
-        id: "1455",
-        logo_urls: {
-          "90": "https://hh.ru/employer-logo/289027.png",
-          "240": "https://hh.ru/employer-logo/289169.png",
-          original: "https://hh.ru/file/2352807.png",
-        },
-        name: "Опыт работы: без опыта",
-        trusted: true,
-        url: "https://api.hh.ru/employers/1455",
-      },
-      has_test: true,
-      id: "8331230",
-      insider_interview: {
-        id: "12345",
-        url: "https://hh.ru/interview/12345?employerId=777",
-      },
-      misleading_vacancy_alert: false,
-      name: "Frontend разработчик в стартап",
-      professional_roles: [
-        {
-          id: "96",
-          name: "Программист, разработчик",
-        },
-      ],
-      published_at: "2013-07-08T16:17:21+0400",
-      relations: [],
-      response_letter_required: true,
-      response_url: null,
-      salary: {
-        currency: "RUR",
-        from: 30000,
-
-        gross: true,
-        to: 50000,
-      },
-      salary_range: {
-        currency: "RUR",
-        frequency: {
-          id: "MONTHLY",
-          name: "Раз в месяц",
-        },
-        from: 30000,
-        gross: true,
-        mode: {
-          id: "MONTH",
-          name: "За месяц",
-        },
-        to: 50000,
-      },
-      schedule: {
-        id: "fullDay",
-        name: "Полный день",
-      },
-      show_logo_in_search: true,
-      snippet: {
-        requirement:
-          "Высшее образование. Опыт работы в качестве <highlighttext>Frontend-разработчик junior</highlighttext>, офис-менеджера. Знание делопроизводства, документооборота. Коммуникативные навыки.",
-        responsibility:
-          "Документооборот (регистрация, отправка, контроль исполнения писем, ведение протоколов, отчетность). Распределение корреспонденции. Прием и распределение телефонных звонков.",
-      },
-      sort_point_distance: 226.001293,
-      type: {
-        id: "open",
-        name: "Открытая",
-      },
-      url: "https://api.hh.ru/vacancies/8331230",
     },
-
+    logo: "https://hhcdn.ru/00001.png",
+    logo_scalable: {
+      default: { height: 300, url: "https://hhcdn.ru/000021.png", width: 500 },
+      xs: { height: 100, url: "https://hhcdn.ru/000022.png", width: 200 },
+    },
+    logo_xs: "https://hhcdn.ru/00002.png",
+    picture: "https://hhcdn.ru/00003.png",
+    picture_scalable: {
+      default: { height: 350, url: "https://hhcdn.ru/000023.png", width: 550 },
+      xs: { height: 150, url: "https://hhcdn.ru/000024.png", width: 250 },
+    },
+    picture_xs: "https://hhcdn.ru/00004.png",
+  },
+  branding: {
+    tariff: "BASIC",
+    type: "CONSTRUCTOR",
+  },
+  contacts: {
+    name: "Имя",
+    phones: [
+      { city: "985", comment: null, country: "7", number: "000-00-00" },
+    ],
+  },
+  counters: {
+    responses: 0,
+  },
+  department: {
+    id: "HH-1455-TECH",
+    name: "HeadHunter::Технический департамент",
+  },
+  employer: {
+    accredited_it_employer: false,
+    alternate_url: "https://hh.ru/employer/1455",
+    country_id: 1,
+    id: "1455",
+    logo_urls: {
+      "90": "https://hh.ru/employer-logo/289027.png",
+      "240": "https://hh.ru/employer-logo/289169.png",
+      original: "https://hh.ru/file/2352807.png",
+    },
+    name: "Опыт работы: без опыта",
+    trusted: true,
+    url: "https://api.hh.ru/employers/1455",
+  },
+  has_test: true,
+  id: "1",
+  insider_interview: {
+    id: "12345",
+    url: "https://hh.ru/interview/12345?employerId=777",
+  },
+  misleading_vacancy_alert: false,
+  name: "Frontend разработчик в стартап",
+  professional_roles: [
+    { id: "96", name: "Программист, разработчик" },
+  ],
+  published_at: "2013-07-08T16:17:21+0400",
+  relations: [],
+  response_letter_required: true,
+  response_url: null,
+  salary: {
+    currency: "RUR",
+    from: 30000,
+    gross: true,
+    to: 50000,
+  },
+  salary_range: {
+    currency: "RUR",
+    frequency: { id: "MONTHLY", name: "Раз в месяц" },
+    from: 30000,
+    gross: true,
+    mode: { id: "MONTH", name: "За месяц" },
+    to: 50000,
+  },
+  schedule: {
+    id: "fullDay",
+    name: "Полный день",
+  },
+  show_logo_in_search: true,
+  snippet: {
+    requirement: "Высшее образование. Опыт работы в качестве <highlighttext>Frontend-разработчик junior</highlighttext>, офис-менеджера...",
+    responsibility: "Документооборот (регистрация, отправка, контроль исполнения писем...).",
+  },
+  sort_point_distance: 226.001293,
+  type: {
+    id: "open",
+    name: "Открытая",
+  },
+  url: "https://api.hh.ru/vacancies/1",
+},
     // Frontend разработчик middle
 
     {
@@ -810,7 +767,7 @@ export const VACANCIES = {
       },
       alternate_url: "https://hh.ru/vacancy/8331230",
       apply_alternate_url:
-        "https://hh.ru/applicant/vacancy_response?vacancyId=8331231",
+        "https://hh.ru/applicant/vacancy_response?vacancyId=2",
       area: {
         id: "2",
         name: "Уфа",
@@ -905,7 +862,7 @@ export const VACANCIES = {
         url: "https://api.hh.ru/employers/1455",
       },
       has_test: true,
-      id: "8331231",
+      id: "2",
       insider_interview: {
         id: "12345",
         url: "https://hh.ru/interview/12345?employerId=777",
@@ -959,7 +916,7 @@ export const VACANCIES = {
         id: "open",
         name: "Открытая",
       },
-      url: "https://api.hh.ru/vacancies/8331230",
+      url: "https://api.hh.ru/vacancies/2",
     },
 
     // Frontend разработчик в казино
@@ -983,9 +940,9 @@ export const VACANCIES = {
         ],
         street: "улица Годовикова",
       },
-      alternate_url: "https://hh.ru/vacancy/8331232",
+      alternate_url: "https://hh.ru/vacancy/3",
       apply_alternate_url:
-        "https://hh.ru/applicant/vacancy_response?vacancyId=8331232",
+        "https://hh.ru/applicant/vacancy_response?vacancyId=3",
       area: {
         id: "1",
         name: "Москва",
@@ -997,7 +954,6 @@ export const VACANCIES = {
         { name: "Next.js" },
         { name: "Redux" }
       ],
-
       brand_snippet: {
         background: {
           color: null,
@@ -1081,7 +1037,7 @@ export const VACANCIES = {
         url: "https://api.hh.ru/employers/1455",
       },
       has_test: true,
-      id: "8331232",
+      id: "3",
       insider_interview: {
         id: "12345",
         url: "https://hh.ru/interview/12345?employerId=777",
@@ -1134,7 +1090,7 @@ export const VACANCIES = {
         id: "open",
         name: "Открытая",
       },
-      url: "https://api.hh.ru/vacancies/8331232",
+      url: "https://api.hh.ru/vacancies/3",
     },
 
     // Frontend разработчик в EdTech продукт
@@ -1335,12 +1291,12 @@ export const VACANCIES = {
         ],
         street: "улица Годовикова",
       },
-      alternate_url: "https://hh.ru/vacancy/8331234",
+      alternate_url: "https://hh.ru/vacancy/1",
       apply_alternate_url:
         "https://hh.ru/applicant/vacancy_response?vacancyId=8331230",
       area: {
         id: "2",
-        name: "Уфа",
+        name: "Москва",
         url: "https://api.hh.ru/areas/1",
       },
 
@@ -1433,7 +1389,7 @@ export const VACANCIES = {
         url: "https://api.hh.ru/employers/1455",
       },
       has_test: true,
-      id: "8331234",
+      id: "1",
       insider_interview: {
         id: "12345",
         url: "https://hh.ru/interview/12345?employerId=777",
@@ -1487,7 +1443,7 @@ export const VACANCIES = {
         id: "open",
         name: "Открытая",
       },
-      url: "https://api.hh.ru/vacancies/8331234",
+      url: "https://api.hh.ru/vacancies/1",
     },
   ],
   page: 0,

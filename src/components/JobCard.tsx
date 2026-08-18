@@ -1,11 +1,14 @@
 import { Card, Text, Badge, Group, Button, Stack } from "@mantine/core";
 import { type Vacancy } from "../types";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   vacancy: Vacancy;
 }
 
 export const JobCard = ({ vacancy }: Props) => {
+  const navigate = useNavigate();
+
   const formatSalary = () => {
     if (!vacancy.salary) return "Зарплата не указана";
     const { from, to, currency } = vacancy.salary;
@@ -21,28 +24,29 @@ export const JobCard = ({ vacancy }: Props) => {
         <Text fw={600} size="lg" c="blue">
           {vacancy.name}
         </Text>
-
         <Group gap="xs">
           <Text fw={700}>{formatSalary()}</Text>
           <Text c="dimmed">•</Text>
           <Text c="dimmed">{vacancy.experience?.name}</Text>
         </Group>
-
         <Group gap="xs">
           <Text>{vacancy.employer?.name}</Text>
           <Badge variant="light" color="gray">
             {vacancy.schedule?.name}
           </Badge>
         </Group>
-
         <Text c="dimmed" size="sm">
           {vacancy.area?.name}
         </Text>
-
         <Group mt="md">
-          <Button variant="default" color="gray">
+          <Button
+            onClick={() => navigate(`/vacancies/${vacancy.id}`)}
+            variant="default"
+            color="gray"
+          >
             Смотреть вакансию
           </Button>
+
           <Button
             component="a"
             href={vacancy.alternate_url}

@@ -1,12 +1,30 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchVacancyById, clearCurrentVacancy } from "../store/slices/vacanciesSlice";
+import {
+  fetchVacancyById,
+  clearCurrentVacancy,
+} from "../store/slices/vacanciesSlice";
 import { type RootState, type AppDispatch } from "../store/store";
+import {
+  Container,
+  Title,
+  Text,
+  Button,
+  Loader,
+  Center,
+  Stack,
+  Divider,
+} from "@mantine/core";
 
-
-const HtmlContent = ({ content, fallback }: { content?: string; fallback: string }) => {
-  if (!content) return <p>{fallback}</p>;
+const HtmlContent = ({
+  content,
+  fallback,
+}: {
+  content?: string;
+  fallback: string;
+}) => {
+  if (!content) return <Text>{fallback}</Text>;
   return <div dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
@@ -16,8 +34,12 @@ const VacancyPage = () => {
   const navigate = useNavigate();
 
   const { currentVacancy, detailsLoading, detailsError } = useSelector(
-    (state: RootState) => state.vacancies
+    (state: RootState) => state.vacancies,
   );
+
+  const vacancy = (currentVacancy as any)?.job
+    ? (currentVacancy as any).job
+    : currentVacancy;
 
   useEffect(() => {
     if (id) {
@@ -28,42 +50,88 @@ const VacancyPage = () => {
     };
   }, [id, dispatch]);
 
-  if (detailsLoading) return <div>Загрузка вакансии</div>;
-  if (detailsError) return <div>Ошибка: {detailsError}</div>;
-  if (!currentVacancy) return <div>Вакансия не найдена</div>;
+  if (detailsLoading) {
+    return (
+      <Center style={{ height: "80vh" }}>
+        <Loader size="xl" />
+        <Text mt="sm">Загрузка вакансии...</Text>
+      </Center>
+    );
+  }
+
+  if (detailsError) {
+    return (
+      <Center style={{ height: "80vh" }}>
+        <Stack align="center">
+          <Text c="red">Ошибка: {detailsError}</Text>
+          <Button onClick={() => navigate("/vacancies")}>
+            Вернуться назад
+          </Button>
+        </Stack>
+      </Center>
+    );
+  }
+
+  if (!vacancy) {
+    return (
+      <Center style={{ height: "80vh" }}>
+        <Text>Вакансия не найдена</Text>
+      </Center>
+    );
+  }
 
   return (
-    <div className="vacancy-page-container">
-      <button onClick={() => navigate(-1)}>Назад</button>
+    <Container size="md" py="xl">
+      <Stack gap="md">
+        <Button
+          variant="subtle"
+          onClick={() => navigate(-1)}
+          align="flex-start"
+        >
+          ← Назад
+        </Button>
 
-      <h1>{currentVacancy.name}</h1>
+        <Title order={1} c="blue">
+          {vacancy.name}
+        </Title>
 
-      {currentVacancy.employer && <h3>Компания: {currentVacancy.employer.name}</h3>}
+        {vacancy.company_name && (
+          <Text size="lg" fw={600}>
+            Компания: {vacancy.company_name}
+          </Text>
+        )}
 
-      {currentVacancy.salary && (
-        <p className="salary">
-          Зарплата: {currentVacancy.salary.from ? `от ${currentVacancy.salary.from}` : ""}
-          {currentVacancy.salary.to ? ` до ${currentVacancy.salary.to}` : ""}
-          {` ${currentVacancy.salary.currency}`}
-        </p>
-      )}
+        {vacancy.salary && (
+          <Text fw={700} size="md">
+            Зарплата: {vacancy.salary}
+          </Text>
+        )}
 
-      <div className="vacancy-description">
-        <h2>Описание вакансии:</h2>
-        <HtmlContent
-          content={currentVacancy.description}
-          fallback="Описание отсутствует."
-        />
-      </div>
+        <Divider />
 
-      <div className="company-description">
-        <h2>О компании:</h2>
-        <HtmlContent
-          content={currentVacancy.about_company}
-          fallback="Информация отсутствует."
-        />
-      </div>
-    </div>
+        <div>
+          <Title order={3} mb="xs">
+            Описание вакансии:
+          </Title>
+          <HtmlContent
+            content={vacancy.description}
+            fallback="Описание отсутствует."
+          />
+        </div>
+
+        <Divider />
+
+        <div>
+          <Title order={3} mb="xs">
+            О компании:
+          </Title>
+          <HtmlContent
+            content={vacancy.about_company}
+            fallback="Информация отсутствует."
+          />
+        </div>
+      </Stack>
+    </Container>
   );
 };
 

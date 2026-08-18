@@ -177,3 +177,4 @@ const VacanciesPage = () => {
 };
 
 export default VacanciesPage;
+
